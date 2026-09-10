@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Special For Nadia ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 25px;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+      text-align: center;
+      position: relative;
+    }
+    .badge {
+      display: inline-block;
+      background: #4a90e2;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+    
+    .heart-wrapper {
+      padding: 40px 0;
+      cursor: pointer;
+    }
+
+    .heart-btn {
+      width: 90px;
+      height: 90px;
+      background: #ff5252;
+      display: inline-block;
+      position: relative;
+      transform: rotate(-45deg);
+      animation: pulse 1.2s infinite;
+      box-shadow: 0 8px 20px rgba(255, 82, 82, 0.35);
+      border-radius: 5px;
+    }
+    .heart-btn::before, .heart-btn::after {
+      content: "";
+      width: 90px;
+      height: 90px;
+      background: #ff5252;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .heart-btn::before { top: -45px; left: 0; }
+    .heart-btn::after { left: 45px; top: 0; }
+    
+    .heart-text {
+      position: absolute;
+      transform: rotate(45deg);
+      color: white;
+      font-weight: 700;
+      top: 32px;
+      left: 10px;
+      z-index: 10;
+      font-size: 12px;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    @keyframes pulse {
+      0% { transform: rotate(-45deg) scale(1); }
+      50% { transform: rotate(-45deg) scale(1.08); }
+      100% { transform: rotate(-45deg) scale(1); }
+    }
+
+    .stage { display: none; }
+    .stage.active { display: block; }
+
+    .slide-img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 18px;
+      margin-bottom: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    .title-name {
+      color: #333;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    .quote {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      min-height: 65px;
+    }
+    .btn {
+      background: #4a90e2;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+      width: 100%;
+    }
+    .btn:hover {
+      background: #357abd;
+      transform: translateY(-2px);
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1.5px solid #e0e0e0;
+      margin-bottom: 15px;
+      resize: none;
+      font-size: 13px;
+      outline: none;
+    }
+    textarea:focus { border-color: #4a90e2; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="badge">JUST FRIEND 🤝✨</div>
+
+    <!-- STAGE 0 -->
+    <div id="stage-0" class="stage active">
+      <h2 style="color: #333; font-size: 22px;">Special Gift For Nadia</h2>
+      <p style="color: #777; font-size: 13px; margin-top: 5px;">Tap QRIS Heart di bawah ini untuk membuka!</p>
+      
+      <div class="heart-wrapper" onclick="nextStage()">
+        <div class="heart-btn">
+          <span class="heart-text">TAP HERE</span>
+        </div>
+      </div>
+
+      <button class="btn" onclick="nextStage()">Buka Hadiah 🎁</button>
+    </div>
+
+    <!-- STAGE 1 -->
+    <div id="stage-1" class="stage">
+      <h3 class="title-name">Nadia ✨</h3>
+      <img id="slide-image" class="slide-img" src="" alt="Foto Nadia">
+      <p id="slide-text" class="quote"></p>
+      <button class="btn" onclick="nextSlide()">Lanjut Slide Next 👉</button>
+    </div>
+
+    <!-- STAGE 2 -->
+    <div id="stage-2" class="stage">
+      <h3 style="color: #333; margin-bottom: 8px;">Kirim Pesan / Permintaan 💬</h3>
+      <p style="color: #666; font-size: 13px; margin-bottom: 15px;">Sebagai sahabat, kamu bebas mau minta dibelikan apa atau mau nyampein pesan apa aja ke aku!</p>
+      <textarea id="user-message" placeholder="Tulis permintaan atau pesan kamu di sini ya, Nad..."></textarea>
+      <button class="btn" onclick="sendToWA()">Kirim ke WhatsApp 🚀</button>
+    </div>
+  </div>
+
+  <script>
+    const myPhoneNumber = "6282123182143"; 
+
+    const slides = [
+      {
+        img: "https://files.catbox.moe/clx7m4.jpg",
+        text: "Hai Nadia! Tetap semangat ya jalanin hari-harimu. Kamu itu kuat dan selalu punya energi positif buat orang di sekitar!"
+      },
+      {
+        img: "https://files.catbox.moe/4dl38m.jpg",
+        text: "Senang banget punya teman sebaik dan seseru kamu. Jangan pernah lelah buat berkembang dan gapai impianmu ya!"
+      },
+      {
+        img: "https://files.catbox.moe/zc7yeo.jpg",
+        text: "Ingat ya Nadia, kalau lagi capek atau butuh teman cerita, aku selalu siap dengarin cerita kamu."
+      },
+      {
+        img: "https://files.catbox.moe/zc7yeo.jpg",
+        text: "Semoga senyum kamu selalu terjaga setiap hari. Apa pun tantangannya, kamu pasti bisa melewatinya!"
+      },
+      {
+        img: "https://files.catbox.moe/9lizwe.jpg",
+        text: "Jangan lupa buat istirahat yang cukup dan luapin waktu buat bahagiain diri sendiri."
+      },
+      {
+        img: "https://files.catbox.moe/m755vl.jpg",
+        text: "Terima kasih udah jadi sahabat terbaik! Di slide terakhir ini, kamu boleh tulis permintaan apa aja ke aku."
+      }
+    ];
+
+    let currentSlide = 0;
+
+    function nextStage() {
+      document.getElementById('stage-0').classList.remove('active');
+      document.getElementById('stage-1').classList.add('active');
+      loadSlide();
+    }
+
+    function loadSlide() {
+      document.getElementById('slide-image').src = slides[currentSlide].img;
+      document.getElementById('slide-text').innerText = slides[currentSlide].text;
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        loadSlide();
+      } else {
+        document.getElementById('stage-1').classList.remove('active');
+        document.getElementById('stage-2').classList.add('active');
+      }
+    }
+
+    function sendToWA() {
+      const msg = document.getElementById('user-message').value;
+      if (!msg.trim()) {
+        alert("Jangan lupa isi pesannya dulu ya Nad!");
+        return;
+      }
+      const textWA = `Hai! Ini pesan/permintaan aku dari web interaktif:\n\n"${msg}"`;
+      const url = `https://wa.me/${myPhoneNumber}?text=${encodeURIComponent(textWA)}`;
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
